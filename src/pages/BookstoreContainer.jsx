@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import NavBar from "../components/NavBar"
+import { Outlet } from "react-router-dom"
 
 const BookstoreContainer = () => {
   const [bookstores, setBookstores] = useState([])
@@ -17,10 +18,10 @@ const BookstoreContainer = () => {
 
   const updateBookstore = (updatedBookstore) => {
     setBookstores(previousStores => previousStores.map(store => {
-        if (store.id === updatedBookstore.id) {
-            return updatedBookstore
-        }
-        return store
+      if (store.id === updatedBookstore.id) {
+        return updatedBookstore
+      }
+      return store
     }))
   }
 
@@ -30,6 +31,7 @@ const BookstoreContainer = () => {
       <main>
         <h1>🏬 Bookstores Directory</h1>
         <a>Add a new Bookstore</a>
+        <Outlet />
       </main>
     </>
   )

@@ -11,7 +11,6 @@ function Home() {
           Discover your favorite bookstores and explore their collections. Click below to start browsing!
         </p>
         <nav>
-          {/* Students will add Links for navigation */}
           <Link>View Bookstores</Link> |{" "}
           <Link>Learn More About This App</Link>
         </nav>

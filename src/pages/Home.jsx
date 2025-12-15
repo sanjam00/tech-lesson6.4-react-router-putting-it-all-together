@@ -1,4 +1,5 @@
 import NavBar from "../components/NavBar"
+import { Link } from "react-router-dom"
 
 function Home() {
   return (
@@ -11,8 +12,8 @@ function Home() {
         </p>
         <nav>
           {/* Students will add Links for navigation */}
-          <a>View Bookstores</a> |{" "}
-          <a>Learn More About This App</a>
+          <Link>View Bookstores</Link> |{" "}
+          <Link>Learn More About This App</Link>
         </nav>
       </main>
     </>

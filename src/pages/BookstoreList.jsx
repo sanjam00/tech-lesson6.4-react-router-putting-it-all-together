@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 
 const BookstoreList = () => {
-    const bookstores = []
+    const { bookstores } = useOutletContext()
 
     const displayBookstores = bookstores.map(store => (
         <li key={store.id}><Link>{store.name}</Link></li>

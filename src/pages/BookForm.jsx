@@ -1,42 +1,46 @@
 import { useState } from "react"
 import { v4 as uuidv4 } from 'uuid'
+import { useOutletContext, useParams } from "react-router-dom"
 
 function BookForm() {
   const [title, setTitle] = useState("")
   const [author, setAuthor] = useState("")
   const [pages, setPages] = useState("")
 
-  const bookstores = []
-  const id = null
+  // get bookstore id from params
+  const { id } = useParams()
+  // destructure bookstores and updateBookstore from outlet context
+  const { bookstores, updateBookstore } = useOutletContext()
+
   const bookstore = bookstores.find(store => store.id === id)
-  
-  if (!bookstore) { return <h2>Bookstore not found.</h2>}
+
+  if (!bookstore) { return <h2>Bookstore not found.</h2> }
 
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    const newBook = { 
-        id: uuidv4(),
-        title, 
-        author, 
-        pages: parseInt(pages) 
+    const newBook = {
+      id: uuidv4(),
+      title,
+      author,
+      pages: parseInt(pages)
     }
     console.log(newBook)
     fetch(`http://localhost:4000/bookstores/${id}`, {
-        method: "PATCH",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({books: [...bookstore.books, newBook]})
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ books: [...bookstore.books, newBook] })
     })
-    .then(r => {
+      .then(r => {
         if (!r.ok) { throw new Error("failed to add book") }
         return r.json()
-    })
-    .then(updatedBookstore => {
-        console.log(updatedBookstore)
-    })
-    .catch(console.log)
+      })
+      .then(updatedBookstore => {
+        updateBookstore(updatedBookstore)
+      })
+      .catch(console.log)
   }
 
   return (

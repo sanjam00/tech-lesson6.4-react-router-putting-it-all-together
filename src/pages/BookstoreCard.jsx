@@ -1,9 +1,10 @@
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, useOutletContext, useParams } from 'react-router-dom'
 
 function BookstoreCard() {
-  const bookstores = null
-  const id = null
+  const { bookstores, updateBookstore } = useOutletContext()
+  const { id } = useParams()
 
+  // find bookstore id and all bookstores
   const bookstore = bookstores.find(b => b.id === id)
 
   if (!bookstore) return <h2>Bookstore not found.</h2>
@@ -21,7 +22,7 @@ function BookstoreCard() {
         ))}
       </ul>
       <Link>Add New Book</Link>
-      <Outlet />
+      <Outlet context={{ bookstores, updateBookstore }} />
     </div>
   )
 }

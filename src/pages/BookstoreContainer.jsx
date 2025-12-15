@@ -31,7 +31,7 @@ const BookstoreContainer = () => {
       <main>
         <h1>🏬 Bookstores Directory</h1>
         <Link>Add a new Bookstore</Link>
-        <Outlet />
+        <Outlet context={{ bookstores, addBookstore, updateBookstore }} />
       </main>
     </>
   )
